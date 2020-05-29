@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# try using https://raw.githubusercontent.com/mozilla-services/mozilla-pipeline-schemas/generated-schemas/schemas/telemetry/main/main.4.bq
+# as input
+
 import sys
 import json
 
@@ -14,15 +17,17 @@ HTML = """
     />
 </head>
 <body>
-<h1>telemetry.main</h1>
-<p>This table represents a stable view of the main ping. It is updated daily.</p>
-<p>Schema: <a href="https://github.com/mozilla-services/mozilla-pipeline-schemas/blob/master/schemas/telemetry/main/main.4.schema.json">mozilla-pipeline-schemas</a></p>
-<p>Scheduling: <a href="https://github.com/mozilla/telemetry-airflow/blob/master/dags/main_summary.py">Airflow</a></p>
+<div class="container mx-auto">
+    <h1>telemetry.main</h1>
+    <p>This table represents a stable view of the main ping. It is updated daily.</p>
+    <p>Schema: <a href="https://github.com/mozilla-services/mozilla-pipeline-schemas/blob/master/schemas/telemetry/main/main.4.schema.json">mozilla-pipeline-schemas</a></p>
+    <p>Scheduling: <a href="https://github.com/mozilla/telemetry-airflow/blob/master/dags/main_summary.py">Airflow</a></p>
 
-<div class="container">
-    <ul>
-        {dict_html}
-    </ul>
+    <div class="container schema-browser mx-auto">
+        <ul>
+            {dict_html}
+        </ul>
+    </div>
 </div>
 </body>
 </html>
@@ -32,7 +37,7 @@ HTML = """
 def get_node_html(node):
     node_html = f"<li>{node['name']}"
     if node.get('description'):
-        node_html += f" <i>{node['description']}</i>"
+        node_html += f" <span class=\"less-important\">{node['description']}</span>"
     if node.get('fields'):
         node_html += "<ul>"
         for field in node['fields']:
