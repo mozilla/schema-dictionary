@@ -6,7 +6,7 @@
   import TelemetryMain from "./TelemetryMain.svelte";
   import SearchClientsDaily from "./SearchClientsDaily.svelte";
 
-  let component;
+  let component = Index;
   let params;
 
   page("/", p => {
