@@ -4,8 +4,6 @@
 
   const URL = "/search-clients-daily.bq.json";
   const request = fetch(URL).then(r => r.json());
-
-  let filterText = "";
 </script>
 
 <div class="container mx-auto">
@@ -37,17 +35,8 @@
     {@html marked(resp.docs)}
   {/await}
 
-</div>
+  {#await request then resp}
+    <SchemaViewer nodes={resp.fields} />
+  {/await}
 
-<div class="container py-4 mx-auto">
-  <input
-    class="shadow appearance-none border rounded w-full p-2 text-gray-700
-    leading-tight focus:outline-none focus:shadow-outline"
-    type="text"
-    bind:value={filterText}
-    placeholder="filter terms e.g. xpcom" />
 </div>
-
-{#await request then resp}
-  <SchemaViewer nodes={resp.fields} {filterText} />
-{/await}
