@@ -3,21 +3,22 @@
 
   // Pages
   import Index from "./Index.svelte";
-  import Explore from "./Explore.svelte";
+  import TelemetryMain from "./TelemetryMain.svelte";
+  import SearchClientsDaily from "./SearchClientsDaily.svelte";
 
   let component;
   let params;
 
-  function setComponent(c) {
-    return function setComponentInner({ params: p }) {
-      component = c;
-      params = p;
-    };
-  }
-
-  page("/", setComponent(Index));
-  page("/explore", setComponent(Explore));
-  page({ hashbang: true });
+  page("/", p => {
+    if (p.hash === "telemetry-main") {
+      component = TelemetryMain;
+    } else if (p.hash === "search-clients-daily") {
+      component = SearchClientsDaily;
+    } else {
+      component = Index;
+    }
+  });
+  page.start();
 </script>
 
-<svelte:component this={component} bind:params />
+<svelte:component this={component} />

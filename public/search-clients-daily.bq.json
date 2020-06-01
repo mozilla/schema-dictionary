@@ -1,0 +1,90 @@
+{
+  "docs": "`search_clients_daily` is designed to enable client-level search analyses.\nQuerying this dataset can be slow;\nconsider using `search_aggregates` for coarse analyses.\n\n## Contents\n\n`search_clients_daily` has one row for each unique combination of:\n(`client_id`, `submission_date`, `engine`, `source`).\n\nIn addition to the standard search count aggregations,\nthis dataset includes some descriptive data for each client.\nFor example, we include `country` and `channel` for each row of data.\nIn the event that a client sends multiple pings on a given `submission_date`\nwe choose an arbitrary value from the pings for that (`client_id`, `submission_date`),\nunless otherwise noted.\n\nThere are five standard search count aggregation columns:\n`sap`, `tagged-sap`, and `tagged-follow-on`, `organic` and `unknown`.\nNote that, if there were no such searches in a row's segment\n(i.e. the count would be 0),\nthe column value is `null`.\nEach of these columns represent different types of searches.\nFor more details, see the [search data documentation]\n\n## Background and Caveats\n\n`search_clients_daily` does not include\n(`client_id` `submission_date`) pairs\nif we did not receive a ping for that `submission_date`.\n\nWe impute a `NULL` `engine` and `source` for pings with no search counts.\nThis ensures users who never search are included in this dataset.\n\nThis dataset is large.\nConsider using Spark on [Databricks](https://dbc-caf9527b-e073.cloud.databricks.com).\nIf you're querying this dataset from re:dash,\nheavily limit the data you read using `submission_date` or `sample_id`.\n\n<!--\n#### Further Reading\n-->\n\n[search data documentation]: ../../search.md\n\n# Introduction\n\n`search_clients_daily` is designed to enable client-level search analyses.\nQuerying this dataset can be slow;\nconsider using `search_aggregates` for coarse analyses.\n\n## Contents\n\n`search_clients_daily` has one row for each unique combination of:\n(`client_id`, `submission_date`, `engine`, `source`).\n\nIn addition to the standard search count aggregations,\nthis dataset includes some descriptive data for each client.\nFor example, we include `country` and `channel` for each row of data.\nIn the event that a client sends multiple pings on a given `submission_date`\nwe choose an arbitrary value from the pings for that (`client_id`, `submission_date`),\nunless otherwise noted.\n\nThere are five standard search count aggregation columns:\n`sap`, `tagged-sap`, and `tagged-follow-on`, `organic` and `unknown`.\nNote that, if there were no such searches in a row's segment\n(i.e. the count would be 0),\nthe column value is `null`.\nEach of these columns represent different types of searches.\nFor more details, see the [search data documentation]\n\n## Background and Caveats\n\n`search_clients_daily` does not include\n(`client_id` `submission_date`) pairs\nif we did not receive a ping for that `submission_date`.\n\nWe impute a `NULL` `engine` and `source` for pings with no search counts.\nThis ensures users who never search are included in this dataset.\n\nThis dataset is large.\nConsider using Spark on [Databricks](https://dbc-caf9527b-e073.cloud.databricks.com).\nIf you're querying this dataset from re:dash,\nheavily limit the data you read using `submission_date` or `sample_id`.\n\n[search data documentation]: ../../search.md\n",
+  "fields": [
+    { "name": "submission_date_s3", "type": "DATE", "mode": "NULLABLE" },
+    { "name": "submission_date", "type": "DATE", "mode": "NULLABLE" },
+    { "name": "client_id", "type": "STRING", "mode": "NULLABLE" },
+    { "name": "engine", "type": "STRING", "mode": "NULLABLE" },
+    { "name": "source", "type": "STRING", "mode": "NULLABLE" },
+    { "name": "country", "type": "STRING", "mode": "NULLABLE" },
+    { "name": "addon_version", "type": "STRING", "mode": "NULLABLE" },
+    { "name": "app_version", "type": "STRING", "mode": "NULLABLE" },
+    { "name": "distribution_id", "type": "STRING", "mode": "NULLABLE" },
+    { "name": "locale", "type": "STRING", "mode": "NULLABLE" },
+    {
+      "name": "user_pref_browser_search_region",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    { "name": "search_cohort", "type": "STRING", "mode": "NULLABLE" },
+    { "name": "os", "type": "STRING", "mode": "NULLABLE" },
+    { "name": "os_version", "type": "STRING", "mode": "NULLABLE" },
+    { "name": "channel", "type": "STRING", "mode": "NULLABLE" },
+    { "name": "profile_creation_date", "type": "INTEGER", "mode": "NULLABLE" },
+    { "name": "default_search_engine", "type": "STRING", "mode": "NULLABLE" },
+    {
+      "name": "default_search_engine_data_load_path",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "name": "default_search_engine_data_submission_url",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "name": "default_private_search_engine",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "name": "default_private_search_engine_data_load_path",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "name": "default_private_search_engine_data_submission_url",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    { "name": "sample_id", "type": "INTEGER", "mode": "NULLABLE" },
+    { "name": "subsession_hours_sum", "type": "FLOAT", "mode": "NULLABLE" },
+    {
+      "name": "sessions_started_on_this_day",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+    },
+    { "name": "active_addons_count_mean", "type": "FLOAT", "mode": "NULLABLE" },
+    {
+      "name": "max_concurrent_tab_count_max",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+    },
+    {
+      "name": "tab_open_event_count_sum",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+    },
+    { "name": "active_hours_sum", "type": "FLOAT", "mode": "NULLABLE" },
+    { "name": "total_uri_count", "type": "INTEGER", "mode": "NULLABLE" },
+    { "name": "profile_age_in_days", "type": "INTEGER", "mode": "NULLABLE" },
+    { "name": "organic", "type": "INTEGER", "mode": "NULLABLE" },
+    { "name": "tagged_sap", "type": "INTEGER", "mode": "NULLABLE" },
+    { "name": "tagged_follow_on", "type": "INTEGER", "mode": "NULLABLE" },
+    { "name": "sap", "type": "INTEGER", "mode": "NULLABLE" },
+    { "name": "ad_click", "type": "INTEGER", "mode": "NULLABLE" },
+    { "name": "search_with_ads", "type": "INTEGER", "mode": "NULLABLE" },
+    { "name": "unknown", "type": "INTEGER", "mode": "NULLABLE" },
+    { "name": "normalized_engine", "type": "STRING", "mode": "NULLABLE" },
+    { "name": "is_default_browser", "type": "BOOLEAN", "mode": "NULLABLE" },
+    {
+      "name": "experiments",
+      "type": "RECORD",
+      "mode": "REPEATED",
+      "fields": [
+        { "name": "key", "type": "STRING", "mode": "NULLABLE" },
+        { "name": "value", "type": "STRING", "mode": "NULLABLE" }
+      ]
+    }
+  ]
+}
