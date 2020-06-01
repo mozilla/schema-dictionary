@@ -9,16 +9,17 @@
   let component = Index;
   let params;
 
-  page("/", p => {
-    if (p.hash === "telemetry-main") {
-      component = TelemetryMain;
-    } else if (p.hash === "search-clients-daily") {
-      component = SearchClientsDaily;
-    } else {
-      component = Index;
-    }
-  });
-  page.start();
+  function setComponent(c) {
+    return function setComponentInner({ params: p }) {
+      component = c;
+      params = p;
+    };
+  }
+  page("/", setComponent(Index));
+  page("/telemetry-main", setComponent(TelemetryMain));
+  page("/search-clients-daily", setComponent(SearchClientsDaily));
+
+  page({ hashbang: true });
 </script>
 
-<svelte:component this={component} />
+<svelte:component this={component} bind:params />
