@@ -1,7 +1,7 @@
 <script>
   import SchemaViewer from "../components/SchemaViewer.svelte";
 
-  const URL = "/main.4.bq.json";
+  const URL = "main.4.bq.json";
   const request = fetch(URL).then(r => r.json());
 </script>
 

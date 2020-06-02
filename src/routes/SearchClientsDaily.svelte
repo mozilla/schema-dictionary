@@ -2,7 +2,7 @@
   import marked from "marked";
   import SchemaViewer from "../components/SchemaViewer.svelte";
 
-  const URL = "/search-clients-daily.bq.json";
+  const URL = "search-clients-daily.bq.json";
   const request = fetch(URL).then(r => r.json());
 </script>
 
