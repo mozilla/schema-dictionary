@@ -22,6 +22,16 @@
   $: nodesWithVisibility = filterTerms != undefined && nodes.map(addVisibility);
 </script>
 
+<style>
+  .schema-browser {
+    @apply p-2;
+    @apply border-4;
+    @apply border-gray-400;
+    max-height: 400px;
+    overflow: scroll;
+  }
+</style>
+
 <h2>Schema</h2>
 <div class="container py-4 mx-auto">
   <input
