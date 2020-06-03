@@ -3,6 +3,10 @@
   @tailwind components;
   @tailwind utilities;
 
+  body {
+    margin: 0;
+  }
+
   h1 {
     @apply text-4xl;
   }
