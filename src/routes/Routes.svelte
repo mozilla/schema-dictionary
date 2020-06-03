@@ -37,16 +37,14 @@
   </div>
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
     <div class="text-sm space-x-2 lg:flex-grow">
-      <a class={component.name === 'Index' ? 'active-link' : ''} href="/">
-        home
-      </a>
+      <a class={component === Index ? 'active-link' : ''} href="/">home</a>
       <a
-        class={component.name === 'TelemetryMain' ? 'active-link' : ''}
+        class={component === TelemetryMain ? 'active-link' : ''}
         href="/telemetry-main">
         telemetry-main
       </a>
       <a
-        class={component.name === 'SearchClientsDaily' ? 'active-link' : ''}
+        class={component === SearchClientsDaily ? 'active-link' : ''}
         href="/search-clients-daily">
         search-clients-daily
       </a>
