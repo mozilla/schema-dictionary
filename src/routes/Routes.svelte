@@ -52,4 +52,8 @@
   </div>
 </nav>
 
-<svelte:component this={component} bind:params />
+<div class="container py-4 mx-auto">
+
+  <svelte:component this={component} bind:params />
+
+</div>
