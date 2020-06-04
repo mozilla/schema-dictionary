@@ -1,25 +1,32 @@
 <script>
+  import throttle from "just-throttle";
+
   import SchemaNode from "./SchemaNode.svelte";
   export let nodes = [];
   let filterText = "";
+  let nodesWithVisibility;
 
-  $: filterTerms = filterText
-    .trim()
-    .split(" ")
-    .filter(t => t.length > 0);
+  const filterTextChanged = () => {
+    const filterTerms = filterText
+      .trim()
+      .split(" ")
+      .filter(t => t.length > 0);
 
-  const addVisibility = node => {
-    node.fields && node.fields.forEach(addVisibility);
-    node.visible =
-      filterTerms.length === 0 ||
-      filterTerms.every(term => node.name.includes(term));
-    nodes.childrenVisible =
-      node.fields &&
-      node.fields.some(child => child.visible || child.childrenVisible);
-    return node;
+    const addVisibility = node => {
+      node.fields && node.fields.forEach(addVisibility);
+      node.visible =
+        filterTerms.length === 0 ||
+        filterTerms.every(term => node.name.includes(term));
+      node.childrenVisible =
+        node.fields &&
+        node.fields.some(child => child.visible || child.childrenVisible);
+      return node;
+    };
+
+    nodesWithVisibility = nodes.map(addVisibility, filterTerms);
   };
 
-  $: nodesWithVisibility = filterTerms != undefined && nodes.map(addVisibility);
+  filterTextChanged();
 </script>
 
 <style>
@@ -39,6 +46,7 @@
     leading-tight focus:outline-none focus:shadow-outline"
     type="text"
     bind:value={filterText}
+    on:input={throttle(filterTextChanged, 200)}
     placeholder="filter terms" />
 </div>
 <div class="container schema-browser mx-auto">

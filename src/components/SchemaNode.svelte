@@ -13,7 +13,7 @@
   {/if}
 </div>
 
-{#if node.fields}
+{#if node.fields && node.childrenVisible}
   {#each node.fields as childNode}
     <svelte:self node={childNode} parentFields={[...parentFields, node.name]} />
   {/each}
