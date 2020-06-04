@@ -27,8 +27,4 @@
     padding-left: 10px;
     @apply mb-4;
   }
-
-  .less-important {
-    @apply text-gray-600;
-  }
 </style>

@@ -3,10 +3,16 @@
   export let parentFields = [];
 </script>
 
-<p style={node.visible ? '' : 'display: none;'}>
-  <span class="less-important">{parentFields.join('.')}</span>
-  <span>{node.name}</span>
-</p>
+<div style={node.visible ? '' : 'display: none;'}>
+  <p>
+    <span class="text-gray-700">{parentFields.join('.')}</span>
+    <span>{node.name}</span>
+  </p>
+  {#if node.description}
+    <p class="text-gray-600 text-xs ml-2">{node.description}</p>
+  {/if}
+</div>
+
 {#if node.fields}
   {#each node.fields as childNode}
     <svelte:self node={childNode} parentFields={[...parentFields, node.name]} />
