@@ -39,7 +39,20 @@ export default {
       dev: !production,
       // we'll extract any component CSS out into
       // a separate file - better for performance
-      preprocess: sveltePreprocess({ postcss: true }),
+      preprocess: {
+        ...sveltePreprocess({ postcss: true }),
+        markup: (input) => ({
+          code: input.content
+            .replace(
+              /(>|})\s+(?![^]*?<\/(?:script|style)>|[^<]*?>|[^{]*?})/g,
+              "$1"
+            )
+            .replace(
+              /(?<!<[^>]*?|{[^}]*?)\s+(<|{)(?![^]*<\/(?:script|style)>)/g,
+              "$1"
+            ),
+        }),
+      },
       css: (css) => {
         css.write("public/build/bundle.css");
       },

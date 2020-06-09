@@ -5,7 +5,9 @@
 
 <div style={node.visible ? '' : 'display: none;'}>
   <p>
-    <span class="text-gray-700">{parentFields.join('.')}</span>
+    <span class="text-gray-700">
+      {parentFields.join('.')}{parentFields.length ? '.' : ''}
+    </span>
     <span>{node.name}</span>
   </p>
   {#if node.description}
