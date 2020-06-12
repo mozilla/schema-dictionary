@@ -33,8 +33,10 @@
     </a>
     &nbsp;
   </span>
-  for a proof-of-concept. For more information on the vision for the project,
-  check out the&nbsp;
+  for a proof-of-concept. There is also an example of mixing this type of data
+  with generated documentation (even more proof-of-concept) in&nbsp;
+  <a href="/search-clients-daily">search_clients_daily</a>
+  . For more information on the vision for the project, check out the&nbsp;
   <a
     href="https://docs.google.com/document/d/1bEJhvyYcijeP5JwwnamLCKyxaKdFIpWYs_ud_OzYC_E/edit#heading=h.dh34mdvj1r6y">
     prototype proposal
