@@ -5,7 +5,6 @@ import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import { spawn } from "child_process";
 import sveltePreprocess from "svelte-preprocess";
-
 const production = !process.env.ROLLUP_WATCH;
 
 function serve() {

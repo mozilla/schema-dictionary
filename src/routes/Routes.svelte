@@ -2,11 +2,11 @@
   import page from "page";
 
   // Pages
-  import Index from "./Index.svelte";
-  import TelemetryMain from "./TelemetryMain.svelte";
+  import TableList from "./TableList.svelte";
+  import TableView from "./TableView.svelte";
   import SearchClientsDaily from "./SearchClientsDaily.svelte";
 
-  let component = Index;
+  let component = TableList;
   let params;
 
   function setComponent(c) {
@@ -15,8 +15,8 @@
       params = p;
     };
   }
-  page("/", setComponent(Index));
-  page("/telemetry-main", setComponent(TelemetryMain));
+  page("/", setComponent(TableList));
+  page("/tables/:table", setComponent(TableView));
   page("/search-clients-daily", setComponent(SearchClientsDaily));
 
   page({ hashbang: true });
@@ -26,27 +26,26 @@
   .active-link {
     @apply text-blue-100;
   }
+
+  .brand {
+    @apply text-gray-100;
+  }
 </style>
 
 <nav class="flex items-center justify-between flex-wrap bg-blue-800 p-2">
-  <div class="flex items-center flex-shrink-0 text-white mr-6">
-    <span class="font-semibold text-xl tracking-tight">
-      Schema Dictionary
+  <div class="flex items-center flex-shrink-0 mr-6">
+    <a class="brand font-semibold text-xl tracking-tight" href="/">
+      Schema Dictionary&nbsp;
       <i>Prototype</i>
-    </span>
+    </a>
   </div>
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
     <div class="text-sm space-x-2 lg:flex-grow">
-      <a class={component === Index ? 'active-link' : ''} href="/">home</a>
-      <a
-        class={component === TelemetryMain ? 'active-link' : ''}
-        href="/telemetry-main">
-        telemetry-main
-      </a>
+      <a class={component === TableList ? 'active-link' : ''} href="/">home</a>
       <a
         class={component === SearchClientsDaily ? 'active-link' : ''}
         href="/search-clients-daily">
-        search-clients-daily
+        search-clients-daily-DEMO
       </a>
     </div>
   </div>
