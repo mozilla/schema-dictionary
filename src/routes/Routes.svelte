@@ -18,6 +18,11 @@
   page("/", setComponent(TableList));
   page("/tables/:table", setComponent(TableView));
   page("/search-clients-daily", setComponent(SearchClientsDaily));
+  page.exit("*", function(ctx, next) {
+    ga("set", "page", ctx.page.current);
+    ga("send", "pageview");
+    next();
+  });
 
   page({ hashbang: true });
 </script>
