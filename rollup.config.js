@@ -1,3 +1,4 @@
+import replace from "rollup-plugin-replace";
 import svelte from "rollup-plugin-svelte";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
@@ -56,7 +57,9 @@ export default {
         css.write("public/build/bundle.css");
       },
     }),
-
+    replace({
+      __GOOGLE_ANALYTICS_ID__: process.env.GOOGLE_ANALYTICS_ID,
+    }),
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
     // some cases you'll need additional configuration -
