@@ -1,4 +1,5 @@
 <script>
+  export let glean_app;
   export let node = {};
   export let parentFields = [];
 </script>
@@ -13,10 +14,22 @@
   {#if node.description}
     <p class="text-gray-600 text-xs ml-2">{node.description}</p>
   {/if}
+  {#if glean_app && parentFields.length === 2 && parentFields[0] === 'metrics'}
+    <p class="text-gray-600 text-xs ml-2">
+      <a
+        target="blank_"
+        href={`https://glean-dictionary.netlify.app/?product=${glean_app}&metric=${node.name}`}>
+        [view in glean dictionary]
+      </a>
+    </p>
+  {/if}
 </div>
 
 {#if node.fields && node.childrenVisible}
   {#each node.fields as childNode}
-    <svelte:self node={childNode} parentFields={[...parentFields, node.name]} />
+    <svelte:self
+      {glean_app}
+      node={childNode}
+      parentFields={[...parentFields, node.name]} />
   {/each}
 {/if}

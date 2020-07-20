@@ -5,6 +5,12 @@ import os
 import re
 import sys
 
+from mozilla_schema_generator.glean_ping import GleanPing
+
+
+glean_mapping = dict((id.replace('-', '_'), name) for (name, id) in GleanPing.get_repos())
+
+
 os.chdir(os.path.join(sys.argv[1], 'schemas'))
 tables = []
 for root, dirs, files in os.walk('.'):
@@ -23,8 +29,10 @@ for root, dirs, files in os.walk('.'):
     version = re.sub(r'.*([0-9]+).bq', r"\1", bq_file)
     bq_definition = 'https://github.com/mozilla-services/mozilla-pipeline-schemas/blob/generated-schemas/schemas/' + path
     bq_definition_raw_json = 'https://raw.githubusercontent.com/mozilla-services/mozilla-pipeline-schemas/generated-schemas/schemas/' + path
-    tables.append({'name': table_name, 'dataset': dataset_name, 'version': version, 'bq_definition': bq_definition, 'bq_definition_raw_json': bq_definition_raw_json })
-
+    table = {'name': table_name, 'dataset': dataset_name, 'version': version, 'bq_definition': bq_definition, 'bq_definition_raw_json': bq_definition_raw_json }
+    if glean_mapping.get(dataset_name):
+        table['glean_app'] = glean_mapping[dataset_name]
+    tables.append(table)
 
 print(json.dumps(tables))
 """

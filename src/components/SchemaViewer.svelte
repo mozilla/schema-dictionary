@@ -1,11 +1,12 @@
 <script>
   import throttle from "just-throttle";
-
   import SchemaNode from "./SchemaNode.svelte";
+
+  export let glean_app;
   export let nodes = [];
   let filterText = "";
   let nodesWithVisibility;
-
+  console.log(glean_app);
   const filterTextChanged = () => {
     const filterTerms = filterText
       .trim()
@@ -52,7 +53,7 @@
 <div class="container schema-browser mx-auto">
   <p>
     {#each nodesWithVisibility as node}
-      <SchemaNode {node} />
+      <SchemaNode {glean_app} {node} />
     {/each}
   </p>
 </div>

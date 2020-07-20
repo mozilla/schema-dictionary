@@ -50,5 +50,5 @@
 
   </table>
 
-  <SchemaViewer {nodes} />
+  <SchemaViewer glean_app={table.glean_app} {nodes} />
 {/await}
