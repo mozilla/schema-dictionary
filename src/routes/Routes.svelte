@@ -5,6 +5,7 @@
   import TableList from "./TableList.svelte";
   import TableView from "./TableView.svelte";
   import SearchClientsDaily from "./SearchClientsDaily.svelte";
+  import MetricSearch from "./MetricSearch.svelte";
 
   let component = TableList;
   let params;
@@ -18,6 +19,7 @@
   page("/", setComponent(TableList));
   page("/tables/:table", setComponent(TableView));
   page("/search-clients-daily", setComponent(SearchClientsDaily));
+  page("/metric-search", setComponent(MetricSearch));
   page.exit("*", function(ctx, next) {
     ga("set", "page", ctx.page.current);
     ga("send", "pageview");
