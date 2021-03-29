@@ -15,12 +15,21 @@
     @apply text-3xl;
   }
 
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
   a {
     @apply text-blue-600;
   }
 
   a:hover {
     @apply text-blue-400;
+    cursor: pointer;
   }
 
   ul {
